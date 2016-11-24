@@ -25,4 +25,11 @@ export EDITOR='emacsclient -nc'
 export VISUAL='emacsclient -n'
 export ALTERNATE_EDITOR=''
 
+#
+# Aliases
+#
+
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
 
