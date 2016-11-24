@@ -7,9 +7,8 @@
 
 setopt EXTENDED_GLOB
 for template_file ( ${ZDOTDIR:-${HOME}}/.zim/templates/* ); do
-    destination="${ZDOTDIR:-${HOME}}/.${template_file:t}"
-    source="${ZDOTDIR:-${HOME}}/.zim/templates/${template_file:t}"
-    echo ${destination} ${source}
-    ln -nfs ${source} ${destination}
+    src="${ZDOTDIR:-${HOME}}/.zim/templates/${template_file:t}"
+    dest="${ZDOTDIR:-${HOME}}/.${template_file:t}"
+    ln -nfs ${src} ${dest}
 done
 
