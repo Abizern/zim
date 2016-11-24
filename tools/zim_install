@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+#
+# zim_install - create symlinks for dotfiles after installation
+#
+
+setopt EXTENDED_GLOB
+for template_file ( ${ZDOTDIR:-${HOME}}/.zim/templates/* ); do
+    destination="${ZDOTDIR:-${HOME}}/.${template_file:t}"
+    source="${ZDOTDIR:-${HOME}}/.zim/templates/${template_file:t}"
+    echo ${destination} ${source}
+    ln -nfs ${source} ${destination}
+done
+
