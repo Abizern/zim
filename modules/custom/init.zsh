@@ -29,7 +29,7 @@ export ALTERNATE_EDITOR=''
 # Aliases
 #
 
-alias d='dirs -v'
+alias dd='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
 
