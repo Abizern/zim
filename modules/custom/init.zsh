@@ -33,4 +33,7 @@ export ALTERNATE_EDITOR=''
 alias dd='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
-
+#
+# Fuck
+#
+eval $(thefuck --alias)
