@@ -8,10 +8,12 @@
 #
 # Editors
 #
+
+alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+alias emacsclient='/usr/local/bin/emacsclient'
 alias ed='emacs --daemon'
 
 # These require emacs server to be running
-alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias em='emacsclient -n'
 alias et='emacsclient -t'
 alias ec='emacsclient -nc'
