@@ -41,6 +41,6 @@ eval $(thefuck --alias)
 #
 # rbenv
 #
-export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
     
