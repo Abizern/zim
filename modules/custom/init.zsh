@@ -37,3 +37,10 @@ for index ({1..9}) alias "$index"="cd +${index}"; unset index
 # Fuck
 #
 eval $(thefuck --alias)
+
+#
+# rbenv
+#
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+    
