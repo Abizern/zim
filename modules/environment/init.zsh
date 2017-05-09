@@ -13,9 +13,9 @@ if [[ ${ZSH_VERSION} != 5.1.1 ]]; then
       autoload -Uz bracketed-paste-magic
       zle -N bracketed-paste bracketed-paste-magic
     fi
-    autoload -Uz url-quote-magic
-    zle -N self-insert url-quote-magic
   fi
+  autoload -Uz url-quote-magic
+  zle -N self-insert url-quote-magic
 fi
 
 # Treat single word simple commands without redirection as candidates for resumption of an existing job.
@@ -51,7 +51,7 @@ fi
 # more work probably needs to be done here to support multiplexers
 if (($+ztermtitle)); then
   case ${TERM} in
-    xterm*)
+    xterm*|*rxvt)
       precmd() { print -Pn "\e]0;${ztermtitle}\a" }
       precmd  # we execute it once to initialize the window title
       ;;
