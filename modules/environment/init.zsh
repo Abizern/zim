@@ -3,20 +3,10 @@
 #
 
 # use smart URL pasting and escaping
-autoload -Uz is-at-least
-if [[ ${ZSH_VERSION} != 5.1.1 ]]; then
-  if is-at-least 5.2; then
-    autoload -Uz bracketed-paste-url-magic
-    zle -N bracketed-paste bracketed-paste-url-magic
-  else
-    if is-at-least 5.1; then
-      autoload -Uz bracketed-paste-magic
-      zle -N bracketed-paste bracketed-paste-magic
-    fi
-  fi
-  autoload -Uz url-quote-magic
-  zle -N self-insert url-quote-magic
-fi
+autoload -Uz bracketed-paste-url-magic
+zle -N bracketed-paste bracketed-paste-url-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
 # Treat single word simple commands without redirection as candidates for resumption of an existing job.
 setopt AUTO_RESUME
@@ -26,6 +16,9 @@ setopt LONG_LIST_JOBS
 
 # Report the status of background jobs immediately, rather than waiting until just before printing a prompt.
 setopt NOTIFY
+
+# Recognize comments starting with `#`.
+setopt INTERACTIVE_COMMENTS
 
 # Run all background jobs at a lower priority. This option is set by default.
 unsetopt BG_NICE
@@ -37,6 +30,9 @@ unsetopt HUP
 # a second attempt to exit the shell will succeed.
 # NO_CHECK_JOBS is best used only in combination with NO_HUP, else such jobs will be killed automatically.
 unsetopt CHECK_JOBS
+
+# Remove path separtor from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
 
 # Set less or more as the default pager.
 if (( ! ${+PAGER} )); then
