@@ -2,7 +2,7 @@ ZIM - Zsh IMproved
 ==================
 
 <div align="center">
-  <a href="https://github.com/Eriner/zim">
+  <a href="https://github.com/zimfw/zimfw">
     <img width=650px src="https://i.eriner.me/zim_banner.png">
   </a>
 </div>
@@ -46,6 +46,13 @@ Installing Zim is easy. If you have a different shell framework installed (like 
   ```
 
 2. Run the script that symlinks dotfiles to the template files:
+  ```
+  setopt EXTENDED_GLOB
+  for template_file ( ${ZDOTDIR:-${HOME}}/.zim/templates/* ); do
+    user_file="${ZDOTDIR:-${HOME}}/.${template_file:t}"
+    touch ${user_file}
+    ( print -rn "$(<${template_file})$(<${user_file})" >! ${user_file} ) 2>/dev/null
+  done
   ```
   .zim/tools/zim_install
 
@@ -94,7 +101,7 @@ zmanage remove
 
 [fish_shell]: https://i.eriner.me/zim_history-substring-search.gif
 [syntax_highlighting]: https://i.eriner.me/zim_syntax-highlighting.gif
-[speed]: https://github.com/Eriner/zim/wiki/Speed
-[modules]: https://github.com/Eriner/zim/wiki/Modules
-[themes]: https://github.com/Eriner/zim/wiki/Themes
-[meta-module]: https://github.com/Eriner/zim/tree/master/modules/meta
+[speed]: https://github.com/zimfw/zimfw/wiki/Speed
+[modules]: https://github.com/zimfw/zimfw/wiki/Modules
+[themes]: https://github.com/zimfw/zimfw/wiki/Themes
+[meta-module]: https://github.com/zimfw/zimfw/tree/master/modules/meta
