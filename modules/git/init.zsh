@@ -9,8 +9,8 @@
 # Log colour scheme has yellow commit hash, bold blue author, cyan date, auto ref names
 # See https://git-scm.com/docs/pretty-formats
 _git_log_medium_format='%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(bold blue)%an <%ae>%n%C(bold)Date:%C(reset)   %C(cyan)%ai (%ar)%C(reset)%n%+B'
-_git_log_oneline_format='%C(yellow)%h%C(reset) %s%C(auto)%d%C(reset)%n'
-_git_log_fullgraph_format='%C(yellow)%h%C(reset) %<|(60,trunc)%s %C(bold blue)<%an> %C(reset)%C(cyan)(%cd)%C(auto)%d%C(reset)%n'
+_git_log_oneline_format='%C(yellow)%h%C(reset) %s%C(auto)%d%C(reset)'
+_git_log_fullgraph_format='%C(yellow)%h%C(reset) %<|(60,trunc)%s %C(bold blue)<%an> %C(reset)%C(cyan)(%ar)%C(auto)%d%C(reset)%n'
 _git_log_brief_format='%C(yellow)%h%C(reset) %s%n%C(bold blue)(%ar by %an)%C(auto)%d%C(reset)%n'
 
 #
@@ -44,13 +44,13 @@ alias gcp='git cherry-pick --ff'
 alias gcP='git cherry-pick --no-commit'
 alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
-alias gcs='git show'
+alias gcs='git show --pretty=format:"${_git_log_medium_format}"'
 alias gcl='git-commit-lost'
 alias gcS='git commit -S'
 alias gpS='git show --pretty=short --show-signature'
 
 # Conflict (C)
-alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+alias gCl='git diff --diff-filter=U --name-only --no-pager'
 alias gCa='git add $(gCl)'
 alias gCe='git mergetool $(gCl)'
 alias gCo='git checkout --ours --'
@@ -90,19 +90,19 @@ alias gid='git diff --no-ext-diff --cached'
 alias giD='git diff --no-ext-diff --cached --word-diff'
 alias gir='git reset'
 alias giR='git reset --patch'
-alias gix='git rm -r --cached'
-alias giX='git rm -r --cached --force'
+alias gix='git rm --cached -r'
+alias giX='git rm --cached -rf'
 
 # Log (l)
 alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
 alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
 alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
 alias glo='git log --topo-order --pretty=format:"${_git_log_oneline_format}"'
-alias glg='git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}"'
-alias glG='git log --topo-order --all --graph --pretty=format:"${_git_log_fullgraph_format}" --date=relative'
+alias glg='git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}%n"'
+alias glG='git log --topo-order --all --graph --pretty=format:"${_git_log_fullgraph_format}"'
 alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
 alias glc='git shortlog --summary --numbered'
-alias glS='git log --show-signature'
+alias glS='git log --topo-order --show-signature --pretty=format:"${_git_log_medium_format}"'
 
 # Merge (m)
 alias gm='git merge'
@@ -136,7 +136,6 @@ alias gRm='git remote rename'
 alias gRu='git remote update'
 alias gRp='git remote prune'
 alias gRs='git remote show'
-alias gRb='git-hub-browse'
 
 # Stash (s)
 alias gs='git stash'
@@ -166,10 +165,12 @@ alias gSu='git submodule foreach git pull origin master'
 alias gSx='git-submodule-remove'
 
 # Tag (t)
+alias gt='git tag'
 alias gts='git tag --sign'
 alias gtv='git verify-tag'
+alias gtx='git tag --delete'
 
-# Working Copy (w)
+# Working tree (w)
 alias gws='git status --short'
 alias gwS='git status'
 alias gwd='git diff --no-ext-diff'
@@ -179,7 +180,7 @@ alias gwR='git reset --hard'
 alias gwc='git clean --dry-run'
 alias gwC='git clean -d --force'
 alias gwx='git rm -r'
-alias gwX='git rm -r --force'
+alias gwX='git rm -rf'
 
 # Misc
-alias g..='cd $(git-root || print .)'
+alias g..='cd "$(git-root || print .)"'
