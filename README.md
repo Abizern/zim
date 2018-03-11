@@ -45,7 +45,7 @@ Installing Zim is easy. If you have a different shell framework installed (like 
   git clone --recursive https://github.com/Abizern/zim.git ${ZDOTDIR:-${HOME}}/.zim
   ```
 
-2. Run the script that symlinks dotfiles to the template files:
+2. Paste this into your terminal to prepend the initialization templates to your configs:
   ```
   setopt EXTENDED_GLOB
   for template_file ( ${ZDOTDIR:-${HOME}}/.zim/templates/* ); do

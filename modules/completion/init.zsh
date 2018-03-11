@@ -39,7 +39,7 @@ setopt AUTO_LIST
 # Perform a path search even on command names with slashes in them.
 setopt PATH_DIRS
 
-# Make globbing (filename generation) sensitive to case.
+# Make globbing (filename generation) not sensitive to case.
 unsetopt CASE_GLOB
 
 # On an ambiguous completion, instead of listing possibilities or beeping, insert the first match immediately.
