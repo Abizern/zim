@@ -1,5 +1,3 @@
-
-
 #
 # startup file read in interactive login shells
 #
@@ -20,11 +18,11 @@
 
   # zcompile enabled module autoloaded functions
   for dir in ${ZIM_HOME}/modules/${^zmodules}/functions(/FN); do
-    zrecompile -pq ${dir}.zwc ${dir}/^([_.]*|prompt_*_setup|README*|*.zwc|*.zwc.old)(-.N)
+    zrecompile -pq ${dir}.zwc ${dir}/^(_*|prompt_*_setup|*.*)(-.N)
   done
 
-  # zcompile enabled module init scripts
-  for file in ${ZIM_HOME}/modules/${^zmodules}/init.zsh(-.N); do
+  # zcompile enabled module scripts
+  for file (${ZIM_HOME}/modules/${^zmodules}/(^*test*/)#*.zsh{,-theme}(.NLk+1)); do
     zrecompile -pq ${file}
   done
 
@@ -32,14 +30,4 @@
   for file in ${ZIM_HOME}/modules/prompt/functions/prompt_*_setup; do
     zrecompile -pq ${file}
   done
-
-  # syntax-highlighting
-  for file in ${ZIM_HOME}/modules/syntax-highlighting/external/highlighters/**^test-data/*.zsh; do
-    zrecompile -pq ${file}
-  done
-  zrecompile -pq ${ZIM_HOME}/modules/syntax-highlighting/external/zsh-syntax-highlighting.zsh
-
-  # zsh-histery-substring-search
-  zrecompile -pq ${ZIM_HOME}/modules/history-substring-search/external/zsh-history-substring-search.zsh
-
 ) &!
