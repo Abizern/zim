@@ -13,6 +13,13 @@ fi
 # Source user configuration
 [[ -s ${ZDOTDIR:-${HOME}}/.zimrc ]] && source ${ZDOTDIR:-${HOME}}/.zimrc
 
+# Set input mode before loading modules
+if [[ ${zinput_mode} == 'vi' ]]; then
+  bindkey -v
+else
+  bindkey -e
+fi
+
 # Autoload module functions
 () {
   local mod_function
@@ -30,13 +37,13 @@ fi
 () {
   local zmodule zmodule_dir zmodule_file
 
-  for zmodule (${zmodules}); do
+  for zmodule in ${zmodules}; do
     zmodule_dir=${ZIM_HOME}/modules/${zmodule}
     if [[ ! -d ${zmodule_dir} ]]; then
       print "No such module \"${zmodule}\"." >&2
     else
-      for zmodule_file (${zmodule_dir}/init.zsh \
-          ${zmodule_dir}/{,zsh-}${zmodule}.{zsh,plugin.zsh,zsh-theme,sh}); do
+      for zmodule_file in ${zmodule_dir}/init.zsh \
+          ${zmodule_dir}/{,zsh-}${zmodule}.{zsh,plugin.zsh,zsh-theme,sh}; do
         if [[ -f ${zmodule_file} ]]; then
           source ${zmodule_file}
           break
